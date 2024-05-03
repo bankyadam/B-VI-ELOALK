@@ -25,18 +25,22 @@ public class Main {
         int turns = 5;
 
         for (int turn = 1; turn <= turns; turn++) {
-            System.out.printf("Round #%d\n", turn);
-
-            int twentyPercentChanceOfZero = rand.nextInt(100 / 20);
-            if (twentyPercentChanceOfZero == 0) {
-                Snail randomSnail = getRandomSnail(snails);
-                randomSnail.addBooster(new DoubleSteps());
-            }
-
-            snails.forEach(Snail::step);
+            makeTurn(turn, snails);
         }
 
         printResults(snails, userBet);
+    }
+
+    private static void makeTurn(int turn, List<Snail> snails) {
+        System.out.printf("Round #%d\n", turn);
+
+        int twentyPercentChanceOfZero = rand.nextInt(100 / 20);
+        if (twentyPercentChanceOfZero == 0) {
+            Snail randomSnail = getRandomSnail(snails);
+            randomSnail.addBooster(new DoubleSteps());
+        }
+
+        snails.forEach(Snail::step);
     }
 
 
