@@ -2,9 +2,11 @@ package hu.gde.hzoxye.eloalk;
 
 import hu.gde.hzoxye.eloalk.boosters.DoubleSteps;
 
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     static Random rand = new Random();
@@ -34,7 +36,7 @@ public class Main {
             snails.forEach(Snail::step);
         }
 
-        // print result
+        printResults(snails, userBet);
     }
 
 
@@ -61,5 +63,19 @@ public class Main {
 
     private static Snail getRandomSnail(List<Snail> snails) {
         return snails.get(rand.nextInt(snails.size()));
+    }
+
+    private static void printResults(List<Snail> snails, Snail userBet) {
+        List<Snail> winners = new ArrayList<>(List.copyOf(snails));
+
+        winners.sort(Comparator.comparing(Snail::getStepsMade, Comparator.reverseOrder()));
+
+        for (int place = 1; place <= winners.size(); place++) {
+            System.out.printf("Place #%d goes to snail #%d\n", place, winners.get(place - 1).getId());
+        }
+
+        if (winners.getFirst().equals(userBet)) {
+            System.out.println("Your bet was right, you won also!");
+        }
     }
 }
