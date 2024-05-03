@@ -22,7 +22,8 @@ public class Main {
         for (int turn = 1; turn <= turns; turn++) {
             System.out.printf("Round #%d\n", turn);
             //      select a snail and add the booster
-            //      step each snail
+
+            snails.forEach(Snail::step);
         }
 
         // print result
