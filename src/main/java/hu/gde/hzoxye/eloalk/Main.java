@@ -16,9 +16,15 @@ public class Main {
 
         System.out.println(userBid);
 
+        int turns = 5;
+
         // run each turn
-        //      select a snail and add the booster
-        //      step each snail
+        for (int turn = 1; turn <= turns; turn++) {
+            System.out.printf("Round #%d\n", turn);
+            //      select a snail and add the booster
+            //      step each snail
+        }
+
         // print result
     }
 
