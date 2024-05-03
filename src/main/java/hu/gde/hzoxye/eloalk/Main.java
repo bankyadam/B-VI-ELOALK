@@ -1,9 +1,13 @@
 package hu.gde.hzoxye.eloalk;
 
+import hu.gde.hzoxye.eloalk.boosters.DoubleSteps;
+
 import java.util.Scanner;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
+    static Random rand = new Random();
 
     public static void main(String[] args) {
         List<Snail> snails = List.of(
@@ -18,10 +22,14 @@ public class Main {
 
         int turns = 5;
 
-        // run each turn
         for (int turn = 1; turn <= turns; turn++) {
             System.out.printf("Round #%d\n", turn);
-            //      select a snail and add the booster
+
+            int twentyPercentChanceOfZero = rand.nextInt(100 / 20);
+            if (twentyPercentChanceOfZero == 0) {
+                Snail randomSnail = getRandomSnail(snails);
+                randomSnail.addBooster(new DoubleSteps());
+            }
 
             snails.forEach(Snail::step);
         }
@@ -51,4 +59,7 @@ public class Main {
         } while (true);
     }
 
+    private static Snail getRandomSnail(List<Snail> snails) {
+        return snails.get(rand.nextInt(snails.size()));
+    }
 }
