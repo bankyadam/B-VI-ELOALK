@@ -12,9 +12,9 @@ public class Main {
                 new Snail(3, Snail.Color.BLUE)
         );
 
-        int userBid = getBidFromUser(snails);
+        Snail userBet = getBetFromUser(snails);
 
-        System.out.println(userBid);
+        System.out.printf("Your bet is on snail #%d, let's start the game…\n", userBet.getId());
 
         int turns = 5;
 
@@ -29,19 +29,19 @@ public class Main {
     }
 
 
-    private static Integer getBidFromUser(List<Snail> snails) {
+    private static Snail getBetFromUser(List<Snail> snails) {
         List<Integer> ids = snails.stream().map(Snail::getId).toList();
         String choices = String.join(", ", ids.stream().map(String::valueOf).toList());
 
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.printf("Which snail will win? (%s) ", choices);
-            String userBid = scanner.nextLine();
+            String bet = scanner.nextLine();
 
             try {
-                Integer snailId = Integer.valueOf(userBid);
+                int snailId = Integer.parseInt(bet);
                 if (ids.contains(snailId)) {
-                    return snailId;
+                    return snails.stream().filter(s -> s.getId() == snailId).findFirst().orElseThrow();
                 }
             } catch (NumberFormatException e) {
             }
