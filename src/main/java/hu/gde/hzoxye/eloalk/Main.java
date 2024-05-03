@@ -14,7 +14,7 @@ public class Main {
 
         Snail userBet = getBetFromUser(snails);
 
-        System.out.printf("Your bet is on snail #%d, let's start the game…\n", userBet.getId());
+        System.out.println("Let's start the game…");
 
         int turns = 5;
 
@@ -42,9 +42,11 @@ public class Main {
             try {
                 int snailId = Integer.parseInt(bet);
                 if (ids.contains(snailId)) {
-                    return snails.stream().filter(s -> s.getId() == snailId).findFirst().orElseThrow();
+                    Snail userBet = snails.stream().filter(s -> s.getId() == snailId).findFirst().orElseThrow();
+                    System.out.printf("Your bet is on snail #%d.\n", userBet.getId());
+                    return userBet;
                 }
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException _) {
             }
         } while (true);
     }
