@@ -7,11 +7,15 @@ public class Snail {
         BLUE
     }
 
-    private Integer id;
+    private int id;
     private Color color;
 
-    public Snail(Integer id, Color color) {
+    public Snail(int id, Color color) {
         this.id = id;
         this.color = color;
+    }
+
+    public int getId() {
+        return id;
     }
 }
